@@ -40,3 +40,4 @@ payment.xml
 /docker-symfony/
 
 *.dist
+nbproject
