@@ -13,9 +13,6 @@ use Symfony\Component\OptionsResolver\Exception\InvalidArgumentException;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Helpers\ObjectUtils;
 
-/**
- *
- */
 class UserController extends Controller
 {
 

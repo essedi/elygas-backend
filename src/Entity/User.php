@@ -14,6 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
 class User extends BaseUser
 {
 
+    const TYPE_ENTERPRISE = 'ENTERPRISE';
+    const TYPE_NOT_ENTERPRISE = 'NOT_ENTERPRISE';
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
@@ -46,6 +49,18 @@ class User extends BaseUser
      * @Groups({"user-read", "user-write"})
      */
     protected $wallet;
+
+    /**
+     * @ORM\OneToMany(targetEntity="EmailMessage", mappedBy="author")
+     * @Groups({"user-write"})
+     */
+    protected $mailsReceived;
+
+    /**
+     * @ORM\OneToMany(targetEntity="EmailMessage", mappedBy="destination")
+     * @Groups({"user-write"})
+     */
+    protected $mailsSent;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -286,6 +301,26 @@ class User extends BaseUser
                 $movement->setUser(null);
             }
         }
+    }
+
+    function getMailsReceived()
+    {
+        return $this->mailsReceived;
+    }
+
+    function getMailsSent()
+    {
+        return $this->mailsSent;
+    }
+
+    function setMailsReceived($mailsReceived)
+    {
+        $this->mailsReceived = $mailsReceived;
+    }
+
+    function setMailsSent($mailsSent)
+    {
+        $this->mailsSent = $mailsSent;
     }
 
 }

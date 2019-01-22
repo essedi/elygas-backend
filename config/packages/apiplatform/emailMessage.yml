@@ -1,13 +1,20 @@
 resources:
-    App\Entity\Movement:
+    App\Entity\EmailMessage:
         attributes:
             pagination_enabled: false
             normalization_context:
-                groups: ['movement-read']
+                groups: ['emailMessage-read']
             denormalization_context:
-                groups: ['movement-write']
+                groups: ['emailMessage-write']
             enable_max_depth: true
         collectionOperations:
+            inbox:
+                method: 'GET'
+                route_name: 'api_message_inbox'
+                access_control: is_granted('ROLE_USER')
+                swagger_context:
+                    summary: 'Returns all inbox EmailMessages of current User'
+
             get:
                 method: 'GET'
                 access_control: is_granted('ROLE_USER')
@@ -15,11 +22,10 @@ resources:
             post:
                 method: 'POST'
                 access_control: is_granted('ROLE_USER')
-            
         itemOperations:
 
             get:
                 method: 'GET'
                 access_control: is_granted('ROLE_USER')
                 swagger_context:
-                    summary: 'Return Movement'
+                    summary: 'Return EmailMessage'
