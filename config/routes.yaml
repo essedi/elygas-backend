@@ -24,3 +24,45 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
+
+# FOSAuthServer
+fos_oauth_server_token:
+    path: /api/login
+    controller: fos_oauth_server.controller.token:tokenAction
+
+fos_oauth_server_authorize:
+    path: /api/auth
+    controller: fos_oauth_server.controller.authorize:authorizeAction
+
+# User
+api_me:
+    path: '/api/me'
+    methods: ['GET']
+    defaults:
+        _controller: App\Controller\UserController::meAction
+        _api_resource_class: App\Entity\User
+        _api_collection_operation_name: 'me'
+
+api_me_put:
+    path: '/api/me'
+    methods: ['PUT']
+    defaults:
+        _controller: App\Controller\UserController::meAction
+        _api_resource_class: App\Entity\User
+        _api_collection_operation_name: 'me_put'
+
+api_register:
+    path: '/api/register'
+    methods: ['POST']
+    defaults:
+        _controller: App\Controller\UserController::registerAction
+        _api_resource_class: App\Entity\User
+        _api_collection_operation_name: 'register'
+
+api_user_tree:
+    path: '/api/me/tree'
+    methods: ['GET']
+    defaults:
+        _controller: App\Controller\UserController::getUserTreeAction
+        _api_resource_class: App\Entity\User
+        _api_collection_operation_name: 'tree'

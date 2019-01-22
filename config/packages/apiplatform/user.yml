@@ -15,12 +15,30 @@ resources:
                 method: 'POST'
 
         itemOperations:
-#            me:
-#                method: 'GET'
-#                route_name: 'api_me'
-#                swagger_context:
-#                    summary: 'Devuelve el perfil del usuario'
-#                access_control: is_granted('ROLE_USER')
+            me:
+                method: 'GET'
+                route_name: 'api_me'
+                swagger_context:
+                    summary: 'Return Users profile'
+                access_control: is_granted('ROLE_USER')
+
+            me_put:
+                method: 'PUT'
+                route_name: 'api_me_put'
+                swagger_context:
+                    summary: 'Return Users profile'
+                access_control: is_granted('ROLE_USER')
+
+            register:
+                method: 'POST'
+                route_name: 'api_register'
+
+            tree:
+                method: 'GET'
+                route_name: 'api_user_tree'
+                swagger_context:
+                    summary: 'Return Users childrens tree'
+                    access_control: is_granted('ROLE_USER')
 
 #            logout:
 #                method: 'POST'
@@ -28,53 +46,53 @@ resources:
 #                defaults:
 #                    color: 'brown'
 #                swagger_context:
-#                    summary: 'Finaliza la sesión'
+#                    summary: 'Ends the token sesion'
 
             get:
                 method: 'GET'
                 access_control: is_granted('ROLE_USER')
                 swagger_context:
-                    summary: 'Devuelve el perfil de un usuario'
+                    summary: 'Return Users profile'
 
 #            filter:
 #                method: 'GET'
 #                route_name: 'api_user_filter'
 #                access_control: is_granted('ROLE_USER')
 #                swagger_context:
-#                    summary: 'Filtra usuarios por nombre dni o cif'
+#                    summary: 'Filter Users by...'
 
-            put:
-                method: 'PUT'
-                access_control: is_granted('ROLE_USER')
-                swagger_context:
-                  summary: 'Actualiza el perfil de un usuario'
-
-#            login:
-#                method: 'POST'
-#                route_name: "fos_oauth_server_token"
+#            put:
+#                method: 'PUT'
+#                access_control: is_granted('ROLE_USER')
 #                swagger_context:
-#                    summary: 'Login (Must be a form-data)'
-#                    parameters:
-#                          -
-#                            name: username
-#                            in: path
-#                            type: string
-#                          -
-#                            name: password
-#                            in: path
-#                            type: string
-#                          -
-#                            name: client_id
-#                            in: path
-#                            type: string
-#                          -
-#                            name: client_secret
-#                            in: path
-#                            type: string
-#                          -
-#                            name: grant_type
-#                            in: path
-#                            type: string
+#                  summary: 'Updates Users profile'
+
+            login:
+                method: 'POST'
+                route_name: "fos_oauth_server_token"
+                swagger_context:
+                    summary: 'Login (Must be a form-data)'
+                    parameters:
+                          -
+                            name: username
+                            in: path
+                            type: string
+                          -
+                            name: password
+                            in: path
+                            type: string
+                          -
+                            name: client_id
+                            in: path
+                            type: string
+                          -
+                            name: client_secret
+                            in: path
+                            type: string
+                          -
+                            name: grant_type
+                            in: path
+                            type: string
 #            delete:
 #                method: 'DELETE'
 #                route_name: 'api_delete_user'

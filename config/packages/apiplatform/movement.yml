@@ -1,0 +1,23 @@
+resources:
+    App\Entity\Movement:
+        attributes:
+            pagination_enabled: false
+            normalization_context:
+                groups: ['movement-read']
+            denormalization_context:
+                groups: ['movement-write']
+            enable_max_depth: true
+        collectionOperations:
+            get:
+                method: 'GET'
+
+            post:
+                method: 'POST'
+                access_control: is_granted('ROLE_USER')
+        itemOperations:
+
+            get:
+                method: 'GET'
+                access_control: is_granted('ROLE_USER')
+                swagger_context:
+                    summary: 'Return Movement'

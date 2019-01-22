@@ -1,6 +1,6 @@
 api_platform:
-    title: 'ProjectName'
-    description: 'Project Description'
+    title: 'Elygas-backend'
+    description: 'Elygas-backend'
     version: '0.1.0'
     path_segment_name_generator: 'api_platform.path_segment_name_generator.dash'
     enable_fos_user: true
