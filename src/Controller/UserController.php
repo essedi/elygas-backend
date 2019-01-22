@@ -60,7 +60,7 @@ class UserController extends Controller
         $this->em->persist($user);
         $this->em->flush();
 
-        return $user;
+        return new JsonResponse($this->normalizer->normalize($user, 'json', ["groups" => "user-read"]));
     }
 
     public function registerAction(Request $request)
@@ -100,19 +100,7 @@ class UserController extends Controller
         $params = $request->query->all();
         $user = $this->getUser();
 
-        $depth = 1;
-        if (isset($params['depth']) && $params['depth'] > 1)
-        {
-            $depth = $params['depth'];
-        }
-
-        $childrens = $user->getChildrens();
-        $response = [
-            "user" => $user,
-            "$user-childrens" => $childrens
-        ];
-
-        return new JsonResponse($this->normalizer->normalize($user->getChildrens()));
+        return new JsonResponse($this->normalizer->normalize($user, 'json', ["groups" => ["children-read", "user-read"]]));
     }
 
     public function addChildren($parent, $children)

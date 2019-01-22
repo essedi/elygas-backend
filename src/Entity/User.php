@@ -37,6 +37,7 @@ class User extends BaseUser
     /**
      * One User has many childrens
      * @ORM\OneToMany(targetEntity="User", mappedBy="parent")
+     * @Groups({"children-read"})
      */
     protected $childrens;
 

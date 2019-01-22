@@ -3,7 +3,7 @@ resources:
         attributes:
             pagination_enabled: false
             normalization_context:
-                groups: ['user-read']
+                groups: ['user-read','children-read']
             denormalization_context:
                 groups: ['user-write']
             enable_max_depth: true
