@@ -32,12 +32,6 @@ class User extends BaseUser
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
-     */
-    protected $lastName;
-
-    /**
      * One User has many childrens
      * @ORM\OneToMany(targetEntity="User", mappedBy="parent")
      * @Groups({"children-read"})
@@ -49,6 +43,12 @@ class User extends BaseUser
      * @Groups({"user-read", "user-write"})
      */
     protected $wallet;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Contract", mappedBy="user")
+     * @Groups({"user-read", "user-write"})
+     */
+    protected $contracts;
 
     /**
      * @ORM\OneToMany(targetEntity="EmailMessage", mappedBy="author")
@@ -63,6 +63,56 @@ class User extends BaseUser
     protected $mailsSent;
 
     /**
+     * Many User has one parent
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="childrens", cascade={"persist"})
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
+     * @Groups({"user-write"})
+     */
+    private $parent;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user-read", "user-write"})
+     */
+    protected $course;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"user-read", "user-write"})
+     */
+    protected $ePin;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"contract-read", "contract-write", "user-write"})
+     */
+    protected $updatedAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"contract-read", "contract-write", "user-write"})
+     */
+    protected $country;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"contract-read", "contract-write", "user-write"})
+     */
+    protected $city;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"contract-read", "contract-write", "user-write"})
+     */
+    protected $cp;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Groups({"contract-read", "contract-write", "user-write"})
+     */
+    protected $direction;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"user-read", "user-write"})
      */
@@ -75,48 +125,17 @@ class User extends BaseUser
     protected $mobilePhone;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @ORM\Column(type="datetime")
+     * @Groups({"contract-read", "contract-write", "user-write"})
      */
-    protected $iban;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
-     */
-    protected $direction;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
-     */
-    protected $directionNumber;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
-     */
-    protected $extension;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
-     */
-    protected $cp;
-
-    /**
-     * Many User has one parent
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="childrens", cascade={"persist"})
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
-     * @Groups({"user-write"})
-     */
-    private $parent;
+    protected $createdDate;
 
     public function __construct()
     {
         parent::__construct();
         $this->childrens = new ArrayCollection();
         $this->wallet = new ArrayCollection();
+        $this->createdDate = new \DateTime('now');
     }
 
     function getId()
@@ -124,74 +143,14 @@ class User extends BaseUser
         return $this->id;
     }
 
-    function getName()
-    {
-        return $this->name;
-    }
-
-    function getLastName()
-    {
-        return $this->lastName;
-    }
-
     function getChildrens()
     {
         return $this->childrens;
     }
 
-    function getPhone()
-    {
-        return $this->phone;
-    }
-
-    function getMobilePhone()
-    {
-        return $this->mobilePhone;
-    }
-
-    function getIban()
-    {
-        return $this->iban;
-    }
-
-    function getDirection()
-    {
-        return $this->direction;
-    }
-
-    function getDirectionNumber()
-    {
-        return $this->directionNumber;
-    }
-
-    function getExtension()
-    {
-        return $this->extension;
-    }
-
-    function getCp()
-    {
-        return $this->cp;
-    }
-
     function getParent()
     {
         return $this->parent;
-    }
-
-    function setId($id)
-    {
-        $this->id = $id;
-    }
-
-    function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    function setLastName($lastName)
-    {
-        $this->lastName = $lastName;
     }
 
     function setChildren($children)
@@ -216,41 +175,6 @@ class User extends BaseUser
                 $children->setParent(null);
             }
         }
-    }
-
-    function setPhone($phone)
-    {
-        $this->phone = $phone;
-    }
-
-    function setMobilePhone($mobilePhone)
-    {
-        $this->mobilePhone = $mobilePhone;
-    }
-
-    function setIban($iban)
-    {
-        $this->iban = $iban;
-    }
-
-    function setDirection($direction)
-    {
-        $this->direction = $direction;
-    }
-
-    function setDirectionNumber($directionNumber)
-    {
-        $this->directionNumber = $directionNumber;
-    }
-
-    function setExtension($extension)
-    {
-        $this->extension = $extension;
-    }
-
-    function setCp($cp)
-    {
-        $this->cp = $cp;
     }
 
     function setParent($parent)
@@ -323,4 +247,116 @@ class User extends BaseUser
         $this->mailsSent = $mailsSent;
     }
 
+    function getContracts()
+    {
+        return $this->contracts;
+    }
+
+    function setContracts($contracts)
+    {
+        $this->contracts = $contracts;
+    }
+
+    function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+    function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    function setCreatedDate($createdDate)
+    {
+        $this->createdDate = $createdDate;
+    }
+
+    function getCreatedDate()
+    {
+        return $this->createdDate;
+    }
+
+    function setCourse($course)
+    {
+        $this->course = $course;
+    }
+
+    function getCourse()
+    {
+        return $this->course;
+    }
+
+    function setEPin($ePin)
+    {
+        $this->ePin = $ePin;
+    }
+
+    function getEPin()
+    {
+        return $this->ePin;
+    }
+
+    function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    function getPhone()
+    {
+        return $this->phone;
+    }
+
+    function getMobilePhone()
+    {
+        return $this->mobilePhone;
+    }
+
+    function setMobilePhone($mobilePhone)
+    {
+        $this->mobilePhone = $mobilePhone;
+    }
+
+    function getCountry()
+    {
+        return $this->country;
+    }
+
+    function setCountry($country)
+    {
+        $this->country = $country;
+    }
+
+    function getCp()
+    {
+        return $this->cp;
+    }
+
+    function setCp($cp)
+    {
+        $this->cp = $cp;
+    }
+
+    function getProvince()
+    {
+        return $this->province;
+    }
+
+    function setProvince($province)
+    {
+        $this->province = $province;
+    }
+
+    function getDirection()
+    {
+        return $this->direction;
+    }
+
+    function setDirection($direction)
+    {
+        $this->direction = $direction;
+    }
+
 }
+
+//country city cp direction

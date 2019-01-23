@@ -28,6 +28,7 @@ yarn-error.log
 *.orig
 /public/images/*
 /public/files/*
+/public/contract
 /tmp/*
 *.lock
 .idea/

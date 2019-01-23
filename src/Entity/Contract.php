@@ -5,6 +5,7 @@ namespace App\Entity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity
@@ -24,61 +25,67 @@ class Contract
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"user-read", "movement-write","movement-read"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      */
     protected $id;
+    
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
+     */
+    protected $userType;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      */
     protected $ownerName;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      */
     protected $phone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      */
     protected $mobilePhone;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      */
     protected $iban;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      */
     protected $direction;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      */
     protected $directionNumber;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      */
     protected $extension;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      */
     protected $cp;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      */
     protected $email;
 
@@ -89,100 +96,136 @@ class Contract
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      * @var string
      */
-    protected $dniFront;
+    protected $dni;
 
     /**
-     * @Vich\UploadableField(mapping="UserImage", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="ContractDni", fileNameProperty="dni")
      * @var File
      */
-    protected $dniFrontFile;
+    protected $dniFile;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      * @var string
      */
     protected $dniBack;
 
     /**
-     * @Vich\UploadableField(mapping="UserImage", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="ContractDniBack", fileNameProperty="dniBack")
      * @var File
      */
     protected $dniBackFile;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      * @var string
      */
     protected $supplyContract;
 
     /**
-     * @Vich\UploadableField(mapping="UserImage", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="UserImage", fileNameProperty="supplyContract")
      * @var File
      */
     protected $supplyContractFile;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      * @var string
      */
     protected $invoice;
 
     /**
-     * @Vich\UploadableField(mapping="UserImage", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="ContractInvoice", fileNameProperty="invoice")
      * @var File
      */
     protected $invoiceFile;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      * @var string
      */
     protected $invoiceBack;
 
     /**
-     * @Vich\UploadableField(mapping="UserImage", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="ContractInvoiceBack", fileNameProperty="invoiceBack")
      * @var File
      */
     protected $invoiceBackFile;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      * @var string
      */
     protected $cif;
 
     /**
-     * @Vich\UploadableField(mapping="UserImage", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="ContractCif", fileNameProperty="cif")
      * @var File
      */
     protected $cifFile;
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * @Groups({"user-read", "user-write"})
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
      * @var string
      */
     protected $gasInvoice;
 
     /**
-     * @Vich\UploadableField(mapping="UserImage", fileNameProperty="image")
+     * @Vich\UploadableField(mapping="ContractGasInvoice", fileNameProperty="gasInvoice")
      * @var File
      */
     protected $gasInvoiceFile;
-    
+
     /**
-     * 
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="contracts")
+     * @Groups({"contract-read", "contract-write", "user-write"})
      */
-    protected $contractCreator;
-    protected $contractSigner;
+    protected $user;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @Groups({"contract-read", "contract-write", "user-write"})
+     */
+    protected $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
+     */
+    protected  $billingUserType;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
+     */
+    protected  $billingOwnerName;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
+     */
+    protected  $billingDirection;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
+     */
+    protected  $billingExtension;
+ 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * @Groups({"contract-read", "contract-write", "user-read", "user-write"})
+     */
+    protected  $billingCp;
 
     function getId()
     {
@@ -279,14 +322,14 @@ class Contract
         return $this->email;
     }
 
-    function getDniFront()
+    function getDni()
     {
-        return $this->dniFront;
+        return $this->dni;
     }
 
-    function getDniFrontFile(): File
+    function getDniFile(): ?File
     {
-        return $this->dniFrontFile;
+        return $this->dniFile;
     }
 
     function getDniBack()
@@ -294,7 +337,7 @@ class Contract
         return $this->dniBack;
     }
 
-    function getDniBackFile(): File
+    function getDniBackFile(): ?File
     {
         return $this->dniBackFile;
     }
@@ -304,7 +347,7 @@ class Contract
         return $this->supplyContract;
     }
 
-    function getSupplyContractFile(): File
+    function getSupplyContractFile(): ?File
     {
         return $this->supplyContractFile;
     }
@@ -314,7 +357,7 @@ class Contract
         return $this->invoice;
     }
 
-    function getInvoiceFile(): File
+    function getInvoiceFile(): ?File
     {
         return $this->invoiceFile;
     }
@@ -324,7 +367,7 @@ class Contract
         return $this->invoiceBack;
     }
 
-    function getInvoiceBackFile(): File
+    function getInvoiceBackFile(): ?File
     {
         return $this->invoiceBackFile;
     }
@@ -334,7 +377,7 @@ class Contract
         return $this->cif;
     }
 
-    function getCifFile(): File
+    function getCifFile(): ?File
     {
         return $this->cifFile;
     }
@@ -344,7 +387,7 @@ class Contract
         return $this->gasInvoice;
     }
 
-    function getGasInvoiceFile(): File
+    function getGasInvoiceFile(): ?File
     {
         return $this->gasInvoiceFile;
     }
@@ -359,14 +402,21 @@ class Contract
         $this->email = $email;
     }
 
-    function setDniFront($dniFront)
+    function setDni($dni)
     {
-        $this->dniFront = $dniFront;
+        $this->dni = $dni;
     }
 
-    function setDniFrontFile(File $dniFrontFile)
+    /**
+     * @param File|UploadedFile $dniFile
+     */
+    function setDniFile(File $dniFile)
     {
-        $this->dniFrontFile = $dniFrontFile;
+        $this->dniFile = $dniFile;
+        if ($dniFile)
+        {
+            $this->setUpdatedAt(new \DateTime('now'));
+        }
     }
 
     function setDniBack($dniBack)
@@ -377,6 +427,10 @@ class Contract
     function setDniBackFile(File $dniBackFile)
     {
         $this->dniBackFile = $dniBackFile;
+        if ($dniFile)
+        {
+            $this->setUpdatedAt(new \DateTime('now'));
+        }
     }
 
     function setSupplyContract($supplyContract)
@@ -387,6 +441,10 @@ class Contract
     function setSupplyContractFile(File $supplyContractFile)
     {
         $this->supplyContractFile = $supplyContractFile;
+        if ($dniFile)
+        {
+            $this->setUpdatedAt(new \DateTime('now'));
+        }
     }
 
     function setInvoice($invoice)
@@ -397,6 +455,10 @@ class Contract
     function setInvoiceFile(File $invoiceFile)
     {
         $this->invoiceFile = $invoiceFile;
+        if ($dniFile)
+        {
+            $this->setUpdatedAt(new \DateTime('now'));
+        }
     }
 
     function setInvoiceBack($invoiceBack)
@@ -407,6 +469,10 @@ class Contract
     function setInvoiceBackFile(File $invoiceBackFile)
     {
         $this->invoiceBackFile = $invoiceBackFile;
+        if ($dniFile)
+        {
+            $this->setUpdatedAt(new \DateTime('now'));
+        }
     }
 
     function setCif($cif)
@@ -417,6 +483,10 @@ class Contract
     function setCifFile(File $cifFile)
     {
         $this->cifFile = $cifFile;
+        if ($dniFile)
+        {
+            $this->setUpdatedAt(new \DateTime('now'));
+        }
     }
 
     function setGasInvoice($gasInvoice)
@@ -427,6 +497,90 @@ class Contract
     function setGasInvoiceFile(File $gasInvoiceFile)
     {
         $this->gasInvoiceFile = $gasInvoiceFile;
+        if ($dniFile)
+        {
+            $this->setUpdatedAt(new \DateTime('now'));
+        }
     }
 
+    function getUser()
+    {
+        return $this->user;
+    }
+
+    function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+    }
+    
+    function getUserType()
+    {
+        return $this->userType;
+    }
+    
+    function setUserType($userType)
+    {
+        $this->userType = $userType;
+    }
+
+    function setBillingUserType($billingUserType)
+    {
+        $this->billingUserType = $billingUserType;
+    }
+
+    function getBillingUserType()
+    {
+        return $this->billingUserType;
+    } 
+
+    function setBillingOwnerName($billingOwnerName)
+    {
+        $this->billingOwnerName = $billingOwnerName;
+    }
+
+    function getBillingOwnerName()
+    {
+        return $this->billingOwnerName;
+    }
+
+    function setBillingDirection($billingDirection)
+    {
+        $this->billingDirection = $billingDirection;
+    }
+
+    function getBillingDirection()
+    {
+        return $this->billingDirection;
+    }
+
+    function setBillingExtension($billingExtension)
+    {
+        $this->billingExtension = $billingExtension;
+    }
+
+    function getBillingExtension()
+    {
+        return $this->billingExtension;
+    }
+
+    function setBillingCp($billingCp)
+    {
+        $this->billingCp = $billingCp;
+    }
+
+    function getBillingCp()
+    {
+        return $this->billingCp;
+    }
+   
 }

@@ -22,3 +22,8 @@ resources:
                 access_control: is_granted('ROLE_USER')
                 swagger_context:
                     summary: 'Return Contract'
+
+            file:
+                method: 'POST'
+                access_control: is_granted('ROLE_USER')
+                route_name: 'api_contract_file'

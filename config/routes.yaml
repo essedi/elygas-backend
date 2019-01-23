@@ -67,12 +67,12 @@ api_user_tree:
         _api_resource_class: App\Entity\User
         _api_collection_operation_name: 'tree'
 
-#emailMessage
+#contract
 
-api_message_inbox:
-    path: '/api/email-messages-inbox'
-    methods: ['GET']
+api_contract_file:
+    path: '/api/contracts/{id}/files'
+    methods: ['POST']
     defaults:
-        _controller: App\Controller\EmailMessageController::getUserMessagesAction
-        _api_resource_class: App\Entity\EmailMessage
-        _api_collection_operation_name: 'inbox'
+        _controller: App\Controller\ContractController::uploadImageAction
+        _api_resource_class: App\Entity\Contract
+        _api_collection_operation_name: 'file'

@@ -39,13 +39,4 @@ class EmailMessageController extends Controller
         $this->em = $em;
     }
 
-    public function getUserMessagesAction(Request $request)
-    {
-        $user = $this->getUser();
-
-        $messages = $this->getDoctrine()->getRepository(EmailMessage::class)->findBy(["destination" => $user]);
-
-        return new JsonResponse($this->normalizer->normalize($messages));
-    }
-
 }

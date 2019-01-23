@@ -1,2 +1,59 @@
 vich_uploader:
     db_driver: orm
+
+    mappings:
+        ContractDni:
+            uri_prefix: '%env(CONTRACT_PATH)%%env(DNI_PATH)%'
+            upload_destination: '%kernel.project_dir%/public/%env(CONTRACT_PATH)%%env(DNI_PATH)%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        ContractDniBack:
+            uri_prefix: '%env(CONTRACT_PATH)%%env(DNI_BACK_PATH)%'
+            upload_destination: '%kernel.project_dir%/public/%env(CONTRACT_PATH)%%env(DNI_BACK_PATH)%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        ContractSupply:
+            uri_prefix: '%env(CONTRACT_PATH)%%env(SUPPLY_PATH)%'
+            upload_destination: '%kernel.project_dir%/public/%env(CONTRACT_PATH)%%env(SUPPLY_PATH)%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        ContractInvoice:
+            uri_prefix: '%env(CONTRACT_PATH)%%env(INVOICE_PATH)%'
+            upload_destination: '%kernel.project_dir%/public/%env(CONTRACT_PATH)%%env(INVOICE_PATH)%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        ContractInvoiceBack:
+            uri_prefix: '%env(CONTRACT_PATH)%%env(INVOICE_BACK_PATH)%'
+            upload_destination: '%kernel.project_dir%/public/%env(CONTRACT_PATH)%%env(INVOICE_BACK_PATH)%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        ContractCif:
+            uri_prefix: '%env(CONTRACT_PATH)%%env(CIF_PATH)%'
+            upload_destination: '%kernel.project_dir%/public/%env(CONTRACT_PATH)%%env(CIF_PATH)%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true
+
+        ContractGasInvoice:
+            uri_prefix: '%env(CONTRACT_PATH)%%env(GAS_INVOICE_PATH)%'
+            upload_destination: '%kernel.project_dir%/public/%env(CONTRACT_PATH)%%env(GAS_INVOICE_PATH)%'
+            namer: Vich\UploaderBundle\Naming\UniqidNamer
+            inject_on_load: false
+            delete_on_update: true
+            delete_on_remove: true

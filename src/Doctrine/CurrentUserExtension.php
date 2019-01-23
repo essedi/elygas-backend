@@ -7,6 +7,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Extension\QueryItemExtensionInterface;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Util\QueryNameGeneratorInterface;
 use App\Entity\User;
 use App\Entity\Movement;
+use App\Entity\EmailMessage;
+use App\Entity\Contract;
 use Doctrine\ORM\Query\Parameter;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -66,12 +68,22 @@ final class CurrentUserExtension implements QueryCollectionExtensionInterface, Q
             switch ($resourceClass)
             {
                 case Movement::class:
+                    $queryBuilder->andWhere(sprintf('%s.user = :current_user', $rootAlias));
+                    $params->add(new Parameter('current_user', $user->getId()));
+                    $queryBuilder->setParameters($params);
+                    break;
+                case Contract::class:
                     if (!($user->hasRole(User::ROLE_SUPER_ADMIN)))
                     {
                         $queryBuilder->andWhere(sprintf('%s.user = :current_user', $rootAlias));
                         $params->add(new Parameter('current_user', $user->getId()));
                         $queryBuilder->setParameters($params);
                     }
+                    break;
+                case EmailMessage::class:
+                    $queryBuilder->andWhere(sprintf('%s.destination = :current_user', $rootAlias));
+                    $params->add(new Parameter('current_user', $user->getId()));
+                    $queryBuilder->setParameters($params);
                     break;
                 default:
                     break;

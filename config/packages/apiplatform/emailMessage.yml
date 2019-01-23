@@ -8,12 +8,6 @@ resources:
                 groups: ['emailMessage-write']
             enable_max_depth: true
         collectionOperations:
-            inbox:
-                method: 'GET'
-                route_name: 'api_message_inbox'
-                access_control: is_granted('ROLE_USER')
-                swagger_context:
-                    summary: 'Returns all inbox EmailMessages of current User'
 
             get:
                 method: 'GET'
